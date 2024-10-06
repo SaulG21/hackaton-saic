@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { signInWithEmailAndPassword } from "firebase/auth"; // Importar desde Firebase
 import { auth } from "../../firebase.ts"; // Importa tu configuración de Firebase
+import Layout from "../../components/shared/Layout";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,8 +21,15 @@ export default function Login() {
     }
   };
 
+
+  const history = useHistory();
+
+  const goToRegister = function(){
+    history.replace("/register");
+  }
+
   return (
-    <div className="flex items-center justify-center h-screen"> 
+    <Layout>
       <div className="bg-white shadow-lg rounded-lg p-10 w-[600px] h-[400px]">
         <h2 className="text-2xl font-bold text-center mb-6">Iniciar Sesión</h2>
         <div className="flex flex-col space-y-4">
@@ -34,13 +43,18 @@ export default function Login() {
             variant="filled"
             fullWidth
           />
-          <div className="flex space-x-4">
-            <Button className="flex-1" variant="outlined" onClick={handleLogin}>
+          <div className="w-full border flex-col space-y-2">
+            <Button className="w-full" variant="contained" onClick={handleLogin}>
               Iniciar Sesión
+            </Button>
+            <Button variant="outlined" className="w-full"
+              onClick={goToRegister}
+            >
+              Registrarse
             </Button>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
