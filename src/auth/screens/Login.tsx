@@ -26,9 +26,6 @@ export default function Login() {
     }
   };
 
-  const goToRegister = function(){
-    history.replace("/register");
-  }
 
   return (
     <div className="flex items-center justify-center h-screen"> 
