@@ -21,6 +21,7 @@ export default function SignUp() {
     history.replace("/login");
     console.log("Cambiando pagina");
   }
+  const history = useHistory();
 
   const handleSignUp = async () => {
     try {
