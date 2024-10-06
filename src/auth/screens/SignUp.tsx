@@ -1,16 +1,44 @@
+// src/auth/screens/SignUp.tsx
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import * as React from "react";
+import { useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { createUserWithEmailAndPassword } from "firebase/auth"; // Importar desde Firebase
+import { auth, db } from "../../firebase.ts"; // Importa tu configuración de Firebase
+import { setDoc, doc } from "firebase/firestore"; // Si vas a usar Firestore para datos adicionales
 
 export default function SignUp() {
-  const [rol, setRol] = React.useState("");
+  const [rol, setRol] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [escuela, setEscuela] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setRol(event.target.value as string);
+  };
+
+  const handleSignUp = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Guardar datos adicionales en Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        nombre,
+        email,
+        rol,
+        escuela
+      });
+
+      console.log("Usuario registrado:", user);
+    } catch (error) {
+      console.error("Error al registrar:", error);
+    }
   };
 
   return (
@@ -18,23 +46,16 @@ export default function SignUp() {
       <div className="bg-white shadow-lg rounded-lg p-10 w-[600px] h-[670px]">
         <h2 className="text-2xl font-bold text-center mb-6">Crea una cuenta</h2>
         <div className="flex flex-col space-y-4">
-          <TextField label="Nombre de usuario" variant="filled" />
-          <TextField label="Nombre completo" variant="filled" />
+          <TextField label="Nombre completo" variant="filled" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+          <TextField label="Correo electronico" variant="filled" value={email} onChange={(e) => setEmail(e.target.value)} />
           <TextField
             id="filled-password-input"
             label="Contraseña"
             type="password"
-            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             variant="filled"
           />
-          <TextField
-            id="filled-password-input"
-            label="Confirmar contraseña"
-            type="password"
-            autoComplete="current-password"
-            variant="filled"
-          />
-          <TextField label="Correo electronico" variant="filled" />
           <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-filled-label">Rol</InputLabel>
             <Select
@@ -43,20 +64,14 @@ export default function SignUp() {
               value={rol}
               onChange={handleChange}
             >
-              <MenuItem value="">
-                <em></em>
-              </MenuItem>
               <MenuItem value={"Teacher"}>Profesor</MenuItem>
               <MenuItem value={"Student"}>Alumno</MenuItem>
             </Select>
           </FormControl>
-          <TextField label="Escuela de procedencia" variant="filled" />
+          <TextField label="Escuela de procedencia" variant="filled" value={escuela} onChange={(e) => setEscuela(e.target.value)} />
           <div className="flex space-x-4">
-            <Button className="flex-1" variant="outlined">
+            <Button className="flex-1" variant="outlined" onClick={handleSignUp}>
               Registrarse
-            </Button>
-            <Button className="flex-1" variant="outlined">
-              Regresar
             </Button>
           </div>
         </div>
