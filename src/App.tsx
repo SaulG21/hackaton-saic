@@ -34,19 +34,17 @@ function App() {
   }
 
   return (
-    <div>
-      <Switch>
-        <Route path="/register">
-          {user ? <Redirect to="/" /> : <SignUp />}
-        </Route>
-        <Route path="/login">
-          {user ? <Redirect to="/" /> : <Login />}
-        </Route>
-        <Route path="/">
-          {user ? <Home /> : <Redirect to="/login" />}
-        </Route>
-      </Switch>
-    </div>
+    <Switch>
+      <Route path="/register">
+        {user ? <Redirect to="/" /> : <SignUp />}
+      </Route>
+      <Route path="/login">
+        {user ? <Redirect to="/" /> : <Login />}
+      </Route>
+      <Route path="/">
+        {user ? <Home /> : <Redirect to="/login" />}
+      </Route>
+    </Switch>
   );
 }
 

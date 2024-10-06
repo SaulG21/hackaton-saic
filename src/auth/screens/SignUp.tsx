@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl/FormControl";
 import InputLabel from "@mui/material/InputLabel/InputLabel";
 import Select from "@mui/material/Select/Select";
 import { Button, MenuItem } from "@mui/material";
+import Layout from "../../components/shared/Layout.tsx";
 
 export default function SignUp() {
   const [rol, setRol] = useState("");
@@ -43,47 +44,48 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-white shadow-lg rounded-lg p-10 w-[600px] h-[670px]">
-        <h2 className="text-2xl font-bold text-center mb-6">Crea una cuenta</h2>
-        <div className="flex flex-col space-y-4">
-          <TextField label="Nombre completo" variant="filled" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-          <TextField label="Correo electronico" variant="filled" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <TextField
-            id="filled-password-input"
-            label="Contraseña"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            variant="filled"
-          />
-          <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-filled-label">Rol</InputLabel>
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={rol}
-              onChange={(event) => setRol(event.target.value as string)}
-            >
-              <MenuItem value={"Teacher"}>Profesor</MenuItem>
-              <MenuItem value={"Student"}>Alumno</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField label="Escuela de procedencia" variant="filled" value={escuela} onChange={(e) => setEscuela(e.target.value)} />
-          <div className="flex space-x-4">
-          <p className="py-3">
-              ¿Ya tienes una cuenta?
-              <b
-                className="hover:cursor-pointer"
-                onClick={goToLogin}
-              >{" Inicia Sesión"}</b>
-            </p>
-            <Button className="flex-1" variant="outlined" onClick={handleSignUp}>
-              Registrarse
-            </Button>
+    <Layout>
+        <div className="bg-white shadow-lg rounded-lg p-10 min-w-[600px] items-center justify-center h-auto space-y-6">
+          <h2 className="text-2xl font-bold text-center mb-6">Crea una cuenta</h2>
+          <div className="flex flex-col space-y-6 w-full justify-center">
+            <TextField label="Nombre completo" variant="filled" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            <TextField label="Correo electronico" variant="filled" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <TextField
+              id="filled-password-input"
+              label="Contraseña"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              variant="filled"
+            />
+            <FormControl variant="filled">
+              <InputLabel id="demo-simple-select-filled-label">Rol</InputLabel>
+              <Select
+                labelId="demo-simple-select-filled-label"
+                id="demo-simple-select-filled"
+                value={rol}
+                onChange={(event) => setRol(event.target.value as string)}
+              >
+                <MenuItem value={"Teacher"}>Profesor</MenuItem>
+                <MenuItem value={"Student"}>Alumno</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField label="Escuela de procedencia" variant="filled" value={escuela} onChange={(e) => setEscuela(e.target.value)} />
+            <div className="flex space-x-4 flex-col justify-center items-center">
+            <p className="py-3">
+                ¿Ya tienes una cuenta?
+                <b
+                  className="hover:cursor-pointer text-primary"
+                  onClick={goToLogin}
+                >{" Inicia Sesión"}</b>
+              </p>
+              <Button className="w-full" variant="contained" onClick={handleSignUp}>
+                Registrarse
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+    </Layout>
+
   );
 }
