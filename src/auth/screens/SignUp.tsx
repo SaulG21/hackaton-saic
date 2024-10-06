@@ -1,15 +1,13 @@
-// src/auth/screens/SignUp.tsx
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import * as React from "react";
 import { useState } from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Importar desde Firebase
-import { auth, db } from "../../firebase.ts"; // Importa tu configuración de Firebase
-import { setDoc, doc } from "firebase/firestore"; // Si vas a usar Firestore para datos adicionales
+import { useHistory } from "react-router-dom"; // Importamos useHistory para redirigir
+import { createUserWithEmailAndPassword } from "firebase/auth"; 
+import { auth, db } from "../../firebase.ts"; 
+import { setDoc, doc } from "firebase/firestore"; 
+import TextField from "@mui/material/TextField/TextField";
+import FormControl from "@mui/material/FormControl/FormControl";
+import InputLabel from "@mui/material/InputLabel/InputLabel";
+import Select from "@mui/material/Select/Select";
+import { Button, MenuItem } from "@mui/material";
 
 export default function SignUp() {
   const [rol, setRol] = useState("");
@@ -17,10 +15,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [nombre, setNombre] = useState("");
   const [escuela, setEscuela] = useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setRol(event.target.value as string);
-  };
+  const history = useHistory(); // Añadimos history para redirigir
 
   const handleSignUp = async () => {
     try {
@@ -36,6 +31,7 @@ export default function SignUp() {
       });
 
       console.log("Usuario registrado:", user);
+      history.push("/"); // Redirigimos al Home después de registrarse
     } catch (error) {
       console.error("Error al registrar:", error);
     }
@@ -62,7 +58,7 @@ export default function SignUp() {
               labelId="demo-simple-select-filled-label"
               id="demo-simple-select-filled"
               value={rol}
-              onChange={handleChange}
+              onChange={(event) => setRol(event.target.value as string)}
             >
               <MenuItem value={"Teacher"}>Profesor</MenuItem>
               <MenuItem value={"Student"}>Alumno</MenuItem>

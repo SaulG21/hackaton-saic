@@ -1,19 +1,21 @@
-// src/auth/screens/Login.tsx
 import { useState } from "react";
+import { useHistory } from "react-router-dom"; // Importamos useHistory para redirigir
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { signInWithEmailAndPassword } from "firebase/auth"; // Importar desde Firebase
-import { auth } from "../../firebase.ts"; // Importa tu configuración de Firebase
+import { signInWithEmailAndPassword } from "firebase/auth"; 
+import { auth } from "../../firebase.ts"; 
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory(); // Añadimos history para redirigir
 
   const handleLogin = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log("Usuario logueado:", user);
+      history.push("/"); // Redirigimos al Home después de iniciar sesión
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
     }
