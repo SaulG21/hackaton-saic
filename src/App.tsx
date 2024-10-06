@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import "./index.css"
+import "./index.css";
+import { Switch, Route } from "react-router-dom";
+import Home from './home/screens/Home';
 
 function App() {
 
   return (
-    <div className='bg-black h-screen w-full'>
-        <p>asdasdasd</p>
-    </div>
+    <Switch>
+      <Route path="/" component={Home}/>
+    </Switch>
   )
 }
 
