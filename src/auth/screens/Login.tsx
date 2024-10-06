@@ -5,6 +5,10 @@ import TextField from "@mui/material/TextField";
 import { signInWithEmailAndPassword } from "firebase/auth"; 
 import { auth } from "../../firebase.ts"; 
 import Layout from "../../components/shared/Layout.tsx";
+// import { ReactComponent as Logo } from './logo.svg';
+import Logo from "../../assets/Logo.svg";
+
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -30,7 +34,8 @@ export default function Login() {
 
   return (
     <Layout>
-      <div className="bg-white shadow-2xl rounded-lg px-10 min-w-[600px] min-h-[400px] flex flex-col justify-evenly space-y-2">
+      <div className="bg-white shadow-2xl rounded-lg px-10 min-w-[600px] min-h-[700px] flex flex-col items-center justify-evenly space-y-2">
+        <img src={Logo} alt="image" className="w-[400px] h-auto mt-3" />
         <h2 className="text-2xl font-bold text-center my-3">Iniciar Sesión</h2>
         <div className="flex flex-col space-y-5 w-full">
           <TextField label="Correo electronico" variant="standard" 

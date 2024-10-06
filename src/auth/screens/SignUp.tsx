@@ -9,6 +9,7 @@ import InputLabel from "@mui/material/InputLabel/InputLabel";
 import Select from "@mui/material/Select/Select";
 import { Button, MenuItem } from "@mui/material";
 import Layout from "../../components/shared/Layout.tsx";
+import Logo from "../../assets/Logo.svg";
 
 export default function SignUp() {
   const [rol, setRol] = useState("");
@@ -45,7 +46,8 @@ export default function SignUp() {
 
   return (
     <Layout>
-        <div className="bg-white shadow-lg rounded-lg p-10 min-w-[600px] items-center justify-center h-auto space-y-6">
+        <div className="bg-white shadow-lg rounded-lg p-10 min-w-[600px] items-center justify-center h-auto space-y-6 flex flex-col">
+        <img src={Logo} alt="image" className="w-[400px] h-auto flex self-center" />
           <h2 className="text-2xl font-bold text-center mb-6">Crea una cuenta</h2>
           <div className="flex flex-col space-y-6 w-full justify-center">
             <TextField label="Nombre completo" variant="standard" value={nombre} onChange={(e) => setNombre(e.target.value)} 
@@ -124,7 +126,7 @@ export default function SignUp() {
             <p className="py-3 ">
                 ¿Ya tienes una cuenta?
                 <b
-                  className="hover:cursor-pointer text-secondary"
+                  className="hover:cursor-pointer text-secondary hover:opacity-45 hover:duration-100 hover:transition-all"
                   onClick={goToLogin}
                 >{" Inicia Sesión"}</b>
               </p>
