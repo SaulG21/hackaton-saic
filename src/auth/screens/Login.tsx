@@ -30,23 +30,45 @@ export default function Login() {
 
   return (
     <Layout>
-      <div className="bg-white shadow-2xl rounded-lg p-10 w-[600px] h-[400px] flex flex-col justify-center space-y-2">
+      <div className="bg-white shadow-2xl rounded-lg px-10 min-w-[600px] min-h-[400px] flex flex-col justify-evenly space-y-2">
         <h2 className="text-2xl font-bold text-center my-3">Iniciar Sesión</h2>
         <div className="flex flex-col space-y-5 w-full">
-          <TextField label="Correo electronico" variant="filled" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <TextField label="Correo electronico" variant="standard" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            sx={{
+                '& label.Mui-focused': {
+                  color: "#2AD879"
+              },
+                '& .MuiInput-underline:after': {
+                    borderBottomColor: "#2AD879"
+                }
+            }}
+            />
           <TextField
             label="Contraseña"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            variant="filled"
+            variant="standard"
+            sx={{
+              '& label.Mui-focused': {
+                color: "#2AD879"
+            },
+              '& .MuiInput-underline:after': {
+                  borderBottomColor: "#2AD879"
+              }
+          }}
           />
         </div>
-        <div className="flex flex-col justify-center border items-center space-y-3">
-          <Button className="w-full" variant="contained" onClick={handleLogin}>
+        <div className="flex flex-col justify-center items-center space-y-3">
+          <Button className="w-full" variant="contained" onClick={handleLogin} style={{backgroundColor:"#2AD879"}}>
             Iniciar Sesión
           </Button>
-          <Button className="w-full" variant="outlined" onClick={goToRegister}>
+          <Button className="w-full" variant="outlined" onClick={goToRegister} style={{
+              color:"#2AD879",
+              borderBlockColor:"#2AD879"
+              }}>
             Registrarse
           </Button>
         </div>

@@ -48,38 +48,87 @@ export default function SignUp() {
         <div className="bg-white shadow-lg rounded-lg p-10 min-w-[600px] items-center justify-center h-auto space-y-6">
           <h2 className="text-2xl font-bold text-center mb-6">Crea una cuenta</h2>
           <div className="flex flex-col space-y-6 w-full justify-center">
-            <TextField label="Nombre completo" variant="filled" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-            <TextField label="Correo electronico" variant="filled" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <TextField label="Nombre completo" variant="standard" value={nombre} onChange={(e) => setNombre(e.target.value)} 
+              sx={{
+                '& label.Mui-focused': {
+                  color: "#2AD879"
+              },
+                '& .MuiInput-underline:after': {
+                    borderBottomColor: "#2AD879"
+                }
+            }}/>
+            <TextField label="Correo electronico" variant="standard" value={email} onChange={(e) => setEmail(e.target.value)} 
+              sx={{
+                '& label.Mui-focused': {
+                  color: "#2AD879"
+              },
+                '& .MuiInput-underline:after': {
+                    borderBottomColor: "#2AD879"
+                }
+            }}/>
             <TextField
               id="filled-password-input"
               label="Contraseña"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              variant="filled"
+              variant="standard"
+              sx={{
+                '& label.Mui-focused': {
+                  color: "#2AD879"
+              },
+                '& .MuiInput-underline:after': {
+                    borderBottomColor: "#2AD879"
+                }
+            }}
             />
-            <FormControl variant="filled">
-              <InputLabel id="demo-simple-select-filled-label">Rol</InputLabel>
+            <FormControl variant="standard">
+              <InputLabel id="demo-simple-select-filled-label"
+                sx={{
+                  '& label.Mui-focused': {
+                    color: "#2AD879"
+                },
+                  '& .MuiInput-underline:after': {
+                      borderBottomColor: "#2AD879"
+                  }
+              }}
+              >Rol</InputLabel>
               <Select
                 labelId="demo-simple-select-filled-label"
                 id="demo-simple-select-filled"
                 value={rol}
+                sx={{
+                  '& label.Mui-focused': {
+                    color: "#2AD879"
+                },
+                  '& .MuiInput-underline:after': {
+                      borderBottomColor: "#2AD879"
+                  }
+              }}
                 onChange={(event) => setRol(event.target.value as string)}
               >
-                <MenuItem value={"Teacher"}>Profesor</MenuItem>
+                <MenuItem value={"Teacher"} >Profesor</MenuItem>
                 <MenuItem value={"Student"}>Alumno</MenuItem>
               </Select>
             </FormControl>
-            <TextField label="Escuela de procedencia" variant="filled" value={escuela} onChange={(e) => setEscuela(e.target.value)} />
+            <TextField label="Escuela de procedencia" variant="standard" value={escuela} onChange={(e) => setEscuela(e.target.value)} 
+              sx={{
+                '& label.Mui-focused': {
+                  color: "#2AD879"
+              },
+                '& .MuiInput-underline:after': {
+                    borderBottomColor: "#2AD879"
+                }
+            }}/>
             <div className="flex space-x-4 flex-col justify-center items-center">
-            <p className="py-3">
+            <p className="py-3 ">
                 ¿Ya tienes una cuenta?
                 <b
-                  className="hover:cursor-pointer text-primary"
+                  className="hover:cursor-pointer text-secondary"
                   onClick={goToLogin}
                 >{" Inicia Sesión"}</b>
               </p>
-              <Button className="w-full" variant="contained" onClick={handleSignUp}>
+              <Button className="w-full" variant="contained" onClick={handleSignUp} sx={{background:"#2AD879"}}>
                 Registrarse
               </Button>
             </div>
