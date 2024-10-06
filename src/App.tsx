@@ -36,7 +36,7 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/sign-up">
+        <Route path="/register">
           {user ? <Redirect to="/" /> : <SignUp />}
         </Route>
         <Route path="/login">
