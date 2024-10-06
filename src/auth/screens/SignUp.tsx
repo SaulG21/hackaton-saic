@@ -8,7 +8,6 @@ import FormControl from "@mui/material/FormControl/FormControl";
 import InputLabel from "@mui/material/InputLabel/InputLabel";
 import Select from "@mui/material/Select/Select";
 import { Button, MenuItem } from "@mui/material";
-import { useHistory } from "react-router-dom";
 import Layout from "../../components/shared/Layout";
 
 export default function SignUp() {
@@ -18,7 +17,6 @@ export default function SignUp() {
   const [nombre, setNombre] = useState("");
   const [escuela, setEscuela] = useState("");
   const history = useHistory();
-  const history = useHistory(); // Añadimos history para redirigir
 
   const handleSignUp = async () => {
     try {

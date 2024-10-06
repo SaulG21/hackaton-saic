@@ -5,7 +5,6 @@ import TextField from "@mui/material/TextField";
 import { signInWithEmailAndPassword } from "firebase/auth"; 
 import { auth } from "../../firebase.ts"; 
 import Layout from "../../components/shared/Layout";
-import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -22,9 +21,6 @@ export default function Login() {
       console.error("Error al iniciar sesión:", error);
     }
   };
-
-
-  const history = useHistory();
 
   const goToRegister = function(){
     history.replace("/register");
