@@ -8,6 +8,8 @@ import FormControl from "@mui/material/FormControl/FormControl";
 import InputLabel from "@mui/material/InputLabel/InputLabel";
 import Select from "@mui/material/Select/Select";
 import { Button, MenuItem } from "@mui/material";
+import { useHistory } from "react-router-dom";
+import Layout from "../../components/shared/Layout";
 
 export default function SignUp() {
   const [rol, setRol] = useState("");
@@ -15,6 +17,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [nombre, setNombre] = useState("");
   const [escuela, setEscuela] = useState("");
+  const history = useHistory();
   const history = useHistory(); // Añadimos history para redirigir
 
   const handleSignUp = async () => {
@@ -37,13 +40,17 @@ export default function SignUp() {
     }
   };
 
+  const goToLogin = function () {
+    history.replace("/login");
+  }
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-white shadow-lg rounded-lg p-10 w-[600px] h-[670px]">
+    <Layout>
+      <div className="bg-white shadow-lg rounded-lg p-10 min-w-[600px] h-auto">
         <h2 className="text-2xl font-bold text-center mb-6">Crea una cuenta</h2>
-        <div className="flex flex-col space-y-4">
-          <TextField label="Nombre completo" variant="filled" value={nombre} onChange={(e) => setNombre(e.target.value)} />
-          <TextField label="Correo electronico" variant="filled" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className="flex flex-col space-y-5">
+          <TextField label="Nombre de usuario" variant="filled"/>
+          <TextField label="Nombre completo" variant="filled" />
           <TextField
             id="filled-password-input"
             label="Contraseña"
@@ -52,7 +59,8 @@ export default function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
             variant="filled"
           />
-          <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+          <TextField label="Correo electronico" variant="filled" />
+          <FormControl variant="filled">
             <InputLabel id="demo-simple-select-filled-label">Rol</InputLabel>
             <Select
               labelId="demo-simple-select-filled-label"
@@ -64,14 +72,24 @@ export default function SignUp() {
               <MenuItem value={"Student"}>Alumno</MenuItem>
             </Select>
           </FormControl>
-          <TextField label="Escuela de procedencia" variant="filled" value={escuela} onChange={(e) => setEscuela(e.target.value)} />
-          <div className="flex space-x-4">
-            <Button className="flex-1" variant="outlined" onClick={handleSignUp}>
-              Registrarse
-            </Button>
+          <TextField label="Escuela de procedencia" variant="filled" />
+          <div className="flex space-x-4 flex-col justify-center items-center">
+            <p className="py-3">
+              ¿Ya tienes una cuenta?
+              <b
+                className="hover:cursor-pointer"
+                onClick={goToLogin}
+              >{" Inicia Sesión"}</b>
+            </p>
+            <div className="flex items-center space-x-5">
+              <Button className="flex-1" variant="contained"
+              >
+                Registrarse
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
